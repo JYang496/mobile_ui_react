@@ -4,6 +4,11 @@ import {Button, Checkbox, ConfigProvider, Input, Radio, RadioChangeEvent, Space,
 import {CheckboxValueType} from "antd/es/checkbox/Group";
 
 function App() {
+    useEffect(()=>{
+        console.log("Built with React, Ant Design and Tailwind\nPremake data is loaded\n" +
+            "Toggle switch button to enable/disable function\nClick on Process button to print data\n" +
+            "=============Created by Jinhua Yang @2024 Feb==============")
+    },[])
 
     const data={
         isProficient:true,
@@ -30,17 +35,22 @@ function App() {
     let defaultCheckedList : string[] = data.toolsUsed.split(",").map(item => dict[item]);
 
     const [disabled, setDisabled] = useState(false);
+    const [inputStatus, setInputStatus] = useState<"" |"warning"|"error">("")
     const [firstName, setFirstName] = useState("");
+    const [placeHolder, setPlaceHolder] = useState("First name");
     const [value, setValue] = useState(data.isProficient ? 2 : 1);
     const [checkedList, setCheckedList] = useState<CheckboxValueType[]>(defaultCheckedList);
     const CheckboxGroup = Checkbox.Group;
 
 
-    const onChange = (list: CheckboxValueType[]) => {
+    const onChangeChecklist = (list: CheckboxValueType[]) => {
         setCheckedList(list);
-        console.log(list)
     };
-    const handleChangeSwitch = (state: boolean) => {
+    const onChangeRadio = (e: RadioChangeEvent) => {
+        setValue(e.target.value);
+        data.isProficient = e.target.value !== 1
+    };
+    const handleSwitch = (state: boolean) => {
         const handles = document.getElementsByClassName('ant-switch-handle')
         const buttons = document.getElementsByClassName('ant-btn')
 
@@ -61,14 +71,20 @@ function App() {
         setDisabled(!state);
     };
     const handleFirstName = (e:any) => {
+        setInputStatus("")
+        setPlaceHolder("First name")
         setFirstName(e.target.value);
     };
-    const onChangeRadio = (e: RadioChangeEvent) => {
-        console.log('radio updated:', e.target.value);
-        setValue(e.target.value);
-        data.isProficient = e.target.value !== 1
-    };
-
+    const handleSubmit = () => {
+        if (firstName.length < 1){
+            setInputStatus("error")
+            setPlaceHolder("Error: first name cannot be empty!")
+            console.log("Error: first name cannot be empty!")
+        } else{
+            console.log(`Name: ${firstName}\nIs proficient: ${value}\nTools used:${checkedList}`)
+        }
+    }
+    // Update Input bar state by disable function
     useEffect(()=>{
         const inputElement = document.getElementById('input_fn');
         if (inputElement) {
@@ -80,21 +96,14 @@ function App() {
         }
     },[disabled])
 
-    const handleSubmit = () => {
-        console.log(`Is proficient: ${value}\nTools used:${checkedList}`)
-    }
 
     return (
       <ConfigProvider
           theme={{
               token: {
                   colorPrimary: '#6043dc',
-
               },
               components: {
-                  Radio :{
-
-                  },
                   Checkbox: {
                       borderRadiusSM: 10,
                   }
@@ -106,10 +115,11 @@ function App() {
                   <div className="form-container p-5">
                       <div className="row flex justify-between mb-6">
                           Editable
-                          <Switch className="" defaultChecked onChange={handleChangeSwitch} />
+                          <Switch className="" defaultChecked onChange={handleSwitch} />
                       </div>
                       <div className="row mb-6" id="input_fn">
-                          <Input placeholder="First name"
+                          <Input placeholder={placeHolder}
+                                 status={inputStatus}
                                  value={firstName}
                                  onChange={handleFirstName} />
                       </div>
@@ -126,7 +136,7 @@ function App() {
                       <div className="question capitalize font-bold text-2xl flex flex-col mb-12">
                           Which tools do you use?
                           <div className="font-normal text-base text-gray-500">Please select all that apply.</div>
-                          <CheckboxGroup className="font-normal grid" options={plainOptions} disabled={disabled} value={checkedList} onChange={onChange} />
+                          <CheckboxGroup className="font-normal grid" options={plainOptions} disabled={disabled} value={checkedList} onChange={onChangeChecklist} />
 
                       </div>
                       <div className="flex justify-center">
