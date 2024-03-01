@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import './App.css';
 import {Button, Checkbox, ConfigProvider, Input, Radio, RadioChangeEvent, Space, Switch} from "antd";
 import {CheckboxValueType} from "antd/es/checkbox/Group";
@@ -41,7 +41,6 @@ function App() {
     const [value, setValue] = useState(data.isProficient ? 2 : 1);
     const [checkedList, setCheckedList] = useState<CheckboxValueType[]>(defaultCheckedList);
     const CheckboxGroup = Checkbox.Group;
-    const buttonRef : any = useRef(null);
 
     const onChangeChecklist = (list: CheckboxValueType[]) => {
         setCheckedList(list);
@@ -124,7 +123,7 @@ function App() {
 
                       </div>
                       <div className="flex justify-center">
-                          <Button ref={buttonRef} className="w-1/2 h-12 rounded-3xl" disabled={disabled} onClick={handleSubmit} type="primary" htmlType="submit" size="large">
+                          <Button className="w-1/2 h-12 rounded-3xl" disabled={disabled} onClick={handleSubmit} type="primary" htmlType="submit" size="large">
                               Process
                           </Button>
                       </div>
