@@ -12,8 +12,19 @@
   border: 1px solid #d9d9d9;
 }
 
+.ant-switch{
+  .ant-switch-handle::before{
+    background-color: #6043dc
+  }
+}
+
+.ant-switch-checked{
+  .ant-switch-handle::before{
+    background-color: #ffffff !important
+  }
+}
+
 .switch-disabled::before{
-  background-color: #6043dc !important;
 }
 
 .ant-switch {
@@ -23,7 +34,7 @@
   border: #d9d9d9 2px solid;
 }
 
-.ant-btn-primary:disabled, .ant-btn-primary.ant-btn-disabled {
+.ant-btn-primary:disabled{
   cursor: not-allowed;
   border-color: #d9d9d9;
   color: #fff;

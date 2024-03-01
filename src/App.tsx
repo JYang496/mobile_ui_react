@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import './App.css';
 import {Button, Checkbox, ConfigProvider, Input, Radio, RadioChangeEvent, Space, Switch} from "antd";
 import {CheckboxValueType} from "antd/es/checkbox/Group";
@@ -41,7 +41,7 @@ function App() {
     const [value, setValue] = useState(data.isProficient ? 2 : 1);
     const [checkedList, setCheckedList] = useState<CheckboxValueType[]>(defaultCheckedList);
     const CheckboxGroup = Checkbox.Group;
-
+    const buttonRef : any = useRef(null);
 
     const onChangeChecklist = (list: CheckboxValueType[]) => {
         setCheckedList(list);
@@ -50,24 +50,8 @@ function App() {
         setValue(e.target.value);
         data.isProficient = e.target.value !== 1
     };
-    const handleSwitch = (state: boolean) => {
-        const handles = document.getElementsByClassName('ant-switch-handle')
-        const buttons = document.getElementsByClassName('ant-btn')
 
-        for (let i = 0; i < handles.length; i++){
-            if(state){
-                handles[i].classList.remove('switch-disabled')
-            } else {
-                handles[i].classList.add('switch-disabled')
-            }
-        }
-        for (let i = 0; i < buttons.length; i++){
-            if(state){
-                buttons[i].classList.remove('btn-disabled')
-            } else {
-                buttons[i].classList.add('btn-disabled')
-            }
-        }
+    const handleSwitch = (state: boolean) => {
         setDisabled(!state);
     };
     const handleFirstName = (e:any) => {
@@ -140,7 +124,7 @@ function App() {
 
                       </div>
                       <div className="flex justify-center">
-                          <Button className="w-1/2 h-12 rounded-3xl" disabled={disabled} onClick={handleSubmit} type="primary" htmlType="submit" size="large">
+                          <Button ref={buttonRef} className="w-1/2 h-12 rounded-3xl" disabled={disabled} onClick={handleSubmit} type="primary" htmlType="submit" size="large">
                               Process
                           </Button>
                       </div>

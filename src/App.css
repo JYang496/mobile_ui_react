@@ -1,29 +1,39 @@
 .App {
   background-color: darkgrey;
-  height: 100vh; }
-  .App .form {
-    border-radius: 5%;
-    height: 667px;
-    width: 375px; }
+  height: 100vh;
+}
+.App .form {
+  border-radius: 5%;
+  height: 667px;
+  width: 375px;
+}
 
 .ant-radio-wrapper .ant-radio-checked::after {
-  border: 1px solid #d9d9d9; }
+  border: 1px solid #d9d9d9;
+}
 
-.switch-disabled::before {
-  background-color: #6043dc !important; }
+.ant-switch .ant-switch-handle::before {
+  background-color: #6043dc;
+}
+
+.ant-switch-checked .ant-switch-handle::before {
+  background-color: #ffffff !important;
+}
 
 .ant-switch {
   min-width: 42px;
   height: 26px;
   background: #fff;
-  border: #d9d9d9 2px solid; }
+  border: #d9d9d9 2px solid;
+}
 
-.ant-btn-primary:disabled, .ant-btn-primary.ant-btn-disabled {
+.ant-btn-primary:disabled {
   cursor: not-allowed;
   border-color: #d9d9d9;
   color: #fff;
   background: #cdc6f2;
-  box-shadow: none; }
+  box-shadow: none;
+}
 
 .ant-switch-handle .ant-switch .ant-switch-handle::before {
   position: absolute;
@@ -35,16 +45,23 @@
   border-radius: 9px;
   box-shadow: 0 2px 4px 0 rgba(0, 35, 11, 0.2);
   transition: all 0.2s ease-in-out;
-  content: ""; }
+  content: "";
+}
 
 .ant-checkbox-checked {
-  background: #d9d9d9; }
+  background: #d9d9d9;
+}
 
 .ant-radio-checked {
-  background-color: #d9d9d9; }
+  background-color: #d9d9d9;
+}
 
 .ant-radio-wrapper .ant-radio-checked .ant-radio-inner::after {
-  display: none; }
+  display: none;
+}
 
 .ant-checkbox-checked .ant-checkbox-inner:after {
-  display: none; }
+  display: none;
+}
+
+/*# sourceMappingURL=App.css.map */
